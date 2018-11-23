@@ -14,8 +14,12 @@ public class Temp extends ApplicationFrame {
         super("XY Line Chart Example with JFreechart");
         Computing computing=new Computing();
         // System.out.println(0.0/0.0);
-        //JFreeChart jFreeChart= ChartFactory.createXYLineChart("","","",computing.calculation());
-        JFreeChart jFreeChart1=ChartFactory.createXYLineChart("","","",computing.calculation(), PlotOrientation.VERTICAL,true,true,false);
+       // JFreeChart jFreeChart= ChartFactory.createXYLineChart("","","",computing.calculation());
+        //JFreeChart jFreeChart1=ChartFactory.createXYLineChart("","","",computing.calculation(), PlotOrientation.VERTICAL,true,true,false);
+       CalcX2 calc=new CalcX2();
+       JFreeChart jFreeChart1=ChartFactory.createXYLineChart("","","",calc.calc(),PlotOrientation.VERTICAL, true,true,false);
+     //   JFreeChart jFreeChart1=ChartFactory.createXYLineChart("","","",computing.calculation(),PlotOrientation.VERTICAL, true,true,false);
+
         ChartPanel chartPanel=new ChartPanel(jFreeChart1);
         chartPanel.setFillZoomRectangle(true);
         chartPanel.setPreferredSize(new Dimension(600, 300));

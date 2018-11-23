@@ -42,7 +42,7 @@ public class Computing implements Data {
     }
 
     private void calcXn1() {
-        Xn1 = X1 + Xn2 * T;
+        Xn1 = X1 + X2 * T;
     }
 
     private void integralOmega() {
@@ -88,17 +88,17 @@ public class Computing implements Data {
     }
 
     private void calcSecX1n() {
-        secX1n = secX1 + secX2n * T;
+        secX1n = secX1 + secX2 * T;
         // secX1n*=100;
     }
 
     private int f() {
-        if (secX3 > 0) {
+        if (secX3 < 0) {
            // secX3n = 1;
-            return 1;
+            return -1;
         } else {
            // secX3n = -1;
-            return -1;
+            return 1;
         }
     }
 
@@ -135,7 +135,7 @@ public class Computing implements Data {
             X1S.add(T * i, X1);
             X2S.add(T * i, X2);
             X3S.add(T * i, X3);
-            X4S.add(T * i, X4 / 249.7);
+           // X4S.add(T * i, X4 / 249.7);
             reverse();
             //  T+=0.001;
         }
@@ -155,36 +155,40 @@ public class Computing implements Data {
         secX1 = X1;
         secX2 = X2;
         secX3 = X3;
-        for (int i = 450000; i < 1350000; i++) {
-            // if (secX3 != 0) {
+        for (int i = 450000; i < 490000; i++) {
+           // System.out.println(Math.round(secX3*100)/100);
+             //if (Math.round(secX3*100)/100 != 0) {
             // System.out.printf("X1: %.10f X2: %.10f X3: %.10f  i:%4d \n", secX1, secX2, secX3, i);
-            fw.write("X1: " + String.format("%.6f", secX1) + "\t X2: " + String.format("%.6f", secX2) + "\t X3: " + String.format("%.6f", secX3) + "\t i" + i + "\n");
-            calcSecX3n2();
-            calcSecX1n();
+          //  fw.write("X1: " + String.format("%.6f", secX1) + "\t X2: " + String.format("%.6f", secX2) + "\t X3: " + String.format("%.6f", secX3) + "\t i" + i + "\n");
 
+            calcSecX1n();
+                 calcSecX3n2();
             calcSecX2n();
             reverse2();
             X1S.add(T * i, secX1);
             X2S.add(T * i, secX2);
             X3S.add(T * i, secX3);
 
-          /*  } else {
-                calcXn1();
+         /*  } else {
+                 fw.write("1 X1: " + String.format("%.6f", X1) + "\t X2: " + String.format("%.6f", X2) + "\t X3: " + String.format("%.6f", X3) + "\t i" + i + "\n");
+
+                 calcXn1();
                 calcX3();
                 calcXn2();
                 calcXn4();
                 X1S.add(T * i, X1);
                 X2S.add(T * i, X2);
-                X3S.add(T * i, X3);
-                X4S.add(T * i, X4 / 249.7);
+               // X3S.add(T * i, X3);
+               // X4S.add(T * i, X4 / 249.7);
                 reverse();
             }*/
         }
         XYSeriesCollection x1SC = new XYSeriesCollection();
         x1SC.addSeries(X1S);
         x1SC.addSeries(X2S);
-        x1SC.addSeries(X3S);
+       x1SC.addSeries(X3S);
         x1SC.addSeries(X4S);
+        System.out.println(X4);
         System.out.println(X4 / 249.7);
         System.out.println(((X4 / 249.7) * 100) / 0.02);
         return x1SC;
